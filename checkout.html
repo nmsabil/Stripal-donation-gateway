@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="style.css">
+      <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+      <script src="https://js.stripe.com/v3/"></script>
+      <title>Stripal Donation</title>
+   </head>
+   <body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+      <section style="height: 500px; width: 1000px; background-color:lightgrey;" class="p-3 bg-red h50 w50">
+         <div class="container">
+          <h2 class="text-center">Stripal Donation</h2>
+         <form class="form-block" >
+            <fieldset>
+               <label> Choose donation amount </label>
+               <select class="form-control" id="amount" onchange="yesnoCheck(this);"> 
+                  <option disabled selected value> -- select an option -- </option>
+                  <option value="5">£5</option>
+                  <option value="10">£10</option>
+                  <option value="50">£50</option>
+                  <option value="other">Please enter an amount</option>
+               </select>
+            </fieldset>
+         </form>
+         </br>
+         <div id="amount5" class="flex-jc-sb" style="display: none;">
+            <form action="https://www.sandbox.paypal.com/donate" method="post" target="_top">
+               <input type="hidden" name="hosted_button_id" value="KHVPMABVQD9MU" />
+               <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+               <img alt="" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" />
+            </form>
+            <button
+               class="custonheight"
+               style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
+               id="checkout-button-price_1JFfZQDPzeSt5wX6QAutsdwT"
+               role="link"
+               type="button"
+               >
+            Stripe Donate
+            </button>
+         </div>
+         <div id="amount10" class="flex-jc-sb" style="display: none;">
+            <form action="https://www.sandbox.paypal.com/donate" method="post" target="_top">
+               <input type="hidden" name="hosted_button_id" value="WW9T4LPKNQDAG" />
+               <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+               <img alt="" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" />
+            </form>
+            <button
+               class="custonheight"
+               style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
+               id="checkout-button-price_1JFyPKDPzeSt5wX6A0gxXkwG"
+               role="link"
+               type="button"
+               >
+            Stripe Donate
+            </button>
+         </div>
+         <div id="amount50" class="flex-jc-sb" style="display: none;">
+            <form action="https://www.sandbox.paypal.com/donate" method="post" target="_top">
+               <input type="hidden" name="hosted_button_id" value="XMK9MFUBNL7TA" />
+               <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+               <img alt="" border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" />
+            </form>
+            <button
+               class="custonheight"
+               style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
+               id="checkout-button-price_1JFySRDPzeSt5wX61sOinZdr"
+               role="link"
+               type="button"
+               >
+            Stripe Donate
+            </button>
+         </div>
+         <div id="xAmount" class="flex-jc-sb" style="display: none;">
+            <form method="post" target="_top" id="fr">
+              <table class="mx-auto">
+                <tr>
+                   <td class="d-flex align-items-center">
+                     <div class="mr-2">£</div>
+                     <input class="form-control" id="customAmount" placeholder="Amount" type="number" name="customamount" step="any" min="0" maxlength="200">
+                   </td>
+                </tr>
+             </table>
+             <p id="negError" class="d-none">Enter a positive amount</p>
+               <!-- paypal -->
+               <div class="paymentBtn pt-3">
+               <div class="paypalBtn">
+               <input type="hidden" name="cmd" value="_donations">
+               <input type="hidden" name="business" value="8VQPKXBWEJW4L">
+               <input type="hidden" name="lc" value="GB">
+               <input type="hidden" name="item_name" value="test">
+               <input type="hidden" name="button_subtype" value="services">
+               <input type="hidden" name="no_note" value="0">
+               <input type="hidden" name="cn" value="Add special instructions to the seller:">
+               <input type="hidden" name="no_shipping" value="2">
+               <input type="hidden" name="currency_code" value="GBP">
+               <input type="hidden" name="bn" value="PP-BuyNowBF:btn_donateCC_LG.gif:NonHosted">
+               
+               <input id="zeroDisplayNone"
+                  formaction="https://www.sandbox.paypal.com/cgi-bin/webscr"
+                  type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+               <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+              </div>
+               <!-- stripe -->
+               <button 
+               id="zeroDisplayNone"
+                  type="submit" 
+                  class="custonheight"
+                  formaction="./create-checkout-session.php"
+                  role="link"
+                  type="button"  
+                  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer">Stipe Donate
+               </button>
+            </form>
+          </div>
+         </div>
+      </section>
+      <!-- Load Stripe.js on your website. -->
+      <script src="https://js.stripe.com/v3"></script>
+      <!-- £5 -->
+      <script>
+         var stripe = Stripe('pk_test_51JFfNuDPzeSt5wX6mt9vEgaALdwKTe49axCSlrEIcYkCd8JkxVCOQ75q68kx4mKyqcXXjnQSjSBEjflhJzBpoUDT00oiurZYVG');
+         (function() {
+           var checkoutButton = document.getElementById('checkout-button-price_1JFfZQDPzeSt5wX6QAutsdwT');
+           checkoutButton.addEventListener('click', function () {
+             stripe.redirectToCheckout({
+               lineItems: [{price: 'price_1JFfZQDPzeSt5wX6QAutsdwT', quantity: 1}],
+               mode: 'payment',
+               successUrl: 'https://localhost/payment/success.html',
+               cancelUrl: 'https://localhost/payment/checkout.html',
+             })
+             .then(function (result) {
+               if (result.error) {
+                 var displayError = document.getElementById('error-message');
+                 displayError.textContent = result.error.message;
+               }
+             });
+           });
+         })();
+      </script>
+      <!-- £10 -->
+      <script>
+         (function() {
+           var checkoutButton = document.getElementById('checkout-button-price_1JFyPKDPzeSt5wX6A0gxXkwG');
+           checkoutButton.addEventListener('click', function () {
+             stripe.redirectToCheckout({
+               lineItems: [{price: 'price_1JFyPKDPzeSt5wX6A0gxXkwG', quantity: 1}],
+               mode: 'payment',
+               successUrl: 'https://localhost/payment/success.html',
+               cancelUrl: 'https://localhost/payment/checkout.html',
+             })
+             .then(function (result) {
+               if (result.error) {
+                 var displayError = document.getElementById('error-message');
+                 displayError.textContent = result.error.message;
+               }
+             });
+           });
+         })();
+         
+      </script>
+      <!-- £50 -->
+      <script>
+         (function() {
+           var checkoutButton = document.getElementById('checkout-button-price_1JFySRDPzeSt5wX61sOinZdr');
+           checkoutButton.addEventListener('click', function () {
+             stripe.redirectToCheckout({
+               lineItems: [{price: 'price_1JFySRDPzeSt5wX61sOinZdr', quantity: 1}],
+               mode: 'payment',
+               successUrl: 'https://localhost/payment/success.html',
+               cancelUrl: 'https://localhost/payment/checkout.html',
+             })
+             .then(function (result) {
+               if (result.error) {
+                 var displayError = document.getElementById('error-message');
+                 displayError.textContent = result.error.message;
+               }
+             });
+           });
+         })();
+      </script>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <!-- Show hide donate button -->
+      <script>    
+         function yesnoCheck(that) {
+           if (that.value == "5") {
+               document.getElementById("amount5").style.display = "flex";
+           } else {
+               document.getElementById("amount5").style.display = "none";
+           }
+           if (that.value == "10") {
+               document.getElementById("amount10").style.display = "flex";
+           } else {
+               document.getElementById("amount10").style.display = "none";
+           }
+           if (that.value == "50") {
+               document.getElementById("amount50").style.display = "flex";
+           } else {
+               document.getElementById("amount50").style.display = "none";
+           }
+           if (that.value == "other") {
+               document.getElementById("xAmount").style.display = "block";
+               let amountField = document.getElementById("customAmount");
+               let form = document.getElementById("xAmount").getElementsByTagName("form");
+         
+               document.getElementById("customAmount").addEventListener('keyup', doThing);
+                function doThing(){
+                  let customPayBtns = document.getElementById("xAmount").querySelectorAll("#zeroDisplayNone");
+                   if(amountField.value <= 0){
+                     let negError = document.getElementById("negError");
+                     negError.classList.remove("d-none");
+                     customPayBtns[0].style.display = "none";
+                     customPayBtns[1].style.display = "none";
+                     
+                   }else{
+                     customPayBtns[0].style.display = "inline";
+                     customPayBtns[1].style.display = "inline";
+                     negError.classList.add("d-none");
+                   }
+                 var amount = `<input TYPE="hidden" NAME="amount" VALUE="${this.value}">`
+                 
+                 if(form[0][0].name == "amount"){
+                   $(form[0][0]).remove();
+                   $(form).prepend(amount);
+                 }else{
+                   $(form).prepend(amount);
+                 }
+                 }
+              
+           } else {
+               document.getElementById("xAmount").style.display = "none";
+           }
+         }
+
+        
+         $(window).bind("pageshow", function() {
+            if($('#amount option').filter(':selected').val() == "5"){
+               document.getElementById("amount5").style.display = "flex";
+            }else{
+               document.getElementById("amount5").style.display = "none";
+            }
+            if($('#amount option').filter(':selected').val() == "10"){
+               document.getElementById("amount10").style.display = "flex";
+            }else{
+               document.getElementById("amount10").style.display = "none";
+            }
+            if($('#amount option').filter(':selected').val() == "50"){
+               document.getElementById("amount50").style.display = "flex";
+            }else{
+               document.getElementById("amount50").style.display = "none";
+            }
+            if($('#amount option').filter(':selected').val() == "other"){
+               document.getElementById("xAmount").style.display = "block";
+               let amountField = document.getElementById("customAmount");
+               let form = document.getElementById("xAmount").getElementsByTagName("form");
+         
+               document.getElementById("customAmount").addEventListener('change', doThing);
+                function doThing(){
+                 var amount = `<input TYPE="hidden" NAME="amount" VALUE="${this.value}">`
+                 
+                 if(form[0][0].name == "amount"){
+                   $(form[0][0]).remove();
+                   $(form).prepend(amount);
+                 }else{
+                   $(form).prepend(amount);
+                 }
+                 }
+            }else{
+               document.getElementById("xAmount").style.display = "none";
+            }
+            
+            
+         });
+         
+         
+
+         
+      </script>
+      <style>
+         .flex-jc-sb{
+         justify-content: space-around;
+         margin-left: 100px;
+         margin-right: 100px;
+         }
+         .custonheight{
+           height: 50px;
+         }
+         
+         .paymentBtn{
+           display: flex;
+          justify-content: space-around;
+         }
+      </style>
+   </body>
+</html>
+</body>
+</html>
